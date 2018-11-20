@@ -1,0 +1,194 @@
+.content-container{
+    width:635px;
+    height:411px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.minimize {
+    width:17px; height:5px; display: inline-block; 
+    margin-bottom: 10px; margin-right: 10px; 
+    background-color: rgb(114, 140, 125);
+    cursor: hand;
+}
+
+.link-status-sep {
+    height:8px;
+}
+
+.url-container{
+    height:40px;
+    width:635px;
+    padding-left: 10px;
+}
+
+.url-input-container{
+    padding-left: 15px;
+}
+
+.save-btn-container{
+    padding-left: 15px;
+}
+
+
+.link-status-container {
+    text-align: center;
+    height: 43px;
+}
+
+.input-1 {
+    width: 394px;
+    height: 34px;
+    border: 0px;
+    border-radius:8px;
+    background-color: rgb(113, 140,126);
+}
+
+.conntect-btn-container{
+    padding-left: 20px;
+}
+
+.connect-button{
+    width:39px;
+    height:40px;
+    border: 0px;
+    background-image: url('../images/ready-connect.png');
+}
+.save-button{
+    width:38px;
+    height:38px;
+    border:0px;
+    background-image: url('../images/save.png');
+}
+
+.first-line{
+    height:8px;
+}
+
+.share-button{
+    border: 0px;
+    width:56px;
+    height:36px;
+    background-image: url('../images/share.png');
+}
+
+.share-btn-container{
+    padding-left:15px;
+    overflow: auto;
+}
+
+button {
+    outline:none; 
+    cursor: hand;   
+}
+
+
+.cp-button{
+    border:0px;
+    width:43px;
+    height:40px;
+    background-image: url('../images/copy.png');
+}
+
+.cp-btn-container{
+    padding-left: 25px;
+}
+
+.second-line{
+    height:8px;
+}
+
+
+
+.quit-button {
+    width : 80px;
+    height : 30px;
+}
+
+.main-page-container {
+    padding-left: 15px;
+    width:635px;
+}
+
+.quit-button-container {
+    text-align: center;
+}
+
+.link-label {
+    border: 1px dotted #22e23c;
+    width : 40px;
+    height: 22px;
+    display: inline-block;
+}
+
+body {
+    overflow:hidden;
+    font-family:'黑体';
+    font-size: 10pt;
+    color:white;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    background-image: url('../images/bg.png');
+}
+
+.profiles-container{
+    margin-left: 20px;
+    border: 0px ;
+    width:525px;
+    border-radius: 8px;
+    background-color: rgb(113, 140,126);
+    height: 148px;
+    padding-top:15px;
+    overflow:auto;
+}
+
+.profile-item-1{
+    display: inline-block; 
+    width:70px;
+    cursor:hand;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height:20px;
+    font-size: 9pt;
+}
+
+.profile-item-1 a:hover {
+    background-color: rgb(113,97,112);
+    width:70px;
+}
+
+.profile-item-2{
+    display: inline-block; 
+    width:370px;
+    text-align: left;
+    height:20px;
+    font-size: 9pt;
+}
+
+.profile-item-3{
+    display: inline-block; 
+    width:60px;
+    cursor:hand;
+    text-align: left;
+    height:20px;
+    font-size: 9pt;
+}
+
+.sep-quit {
+    height: 20px;
+}
+
+.quit-button{
+    width:57px;
+    height: 36px;
+    border: 0px;
+    background-image: url('../images/quit.png');
+}
+
+.del-btn {
+    background-image: url('../images/del-btn.png');
+    width: 45px;
+    height: 22px;
+    border:0px;
+}

@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <title>caddy-client</title>
+    <link rel="stylesheet" href="./css/main.css" type="text/css" />
+</head>
+
+<body>
+    <div class='content-container'>
+        <div style=" height:25px; ">
+        <!--拖动区域-->
+            <div style="-webkit-app-region: drag; width:590px; height:25px; display: inline-block;">
+            </div>
+            <div style="height:25px; width: 35px; display: inline-block; padding-bottom: 10px; ">
+                <a  class='minimize'  id ='minimize-box'></a>
+            </div>
+        </div>
+
+        <!--内容展示区域-->
+        <div class='main-page-container' id='main-page-container'>
+            <!--连接状态区域-->
+            <div class='link-status-container'>
+                <span>
+                    <a><img id='disconnected-img' src="images/disconnected.png"  alt='连接断开'/></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a><img id='connected-img' src="images/connected.png" alt='已连接'/></span></a>
+            </div>
+
+            <div class='link-status-sep'></div>
+            
+            <!--url输入区域-->
+            <div class='url-container'>
+                <table>
+                    <tr>
+                        <td><img src="images/url.png" alt='连接url'/></td>
+                        <td>
+                            <div class='url-input-container'>
+                                <input id='connect-url' value="" 
+                                placeholder="连接url" class='input-1' /> </div>
+                        </td>
+                        <td><div class='conntect-btn-container'><button id='connect-button' class='connect-button'></button></div></td>
+                        <td><div class='save-btn-container'><button id='save-button' class="save-button"></button></div></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class='first-line'></div>
+
+            <!--分享链接展示区域-->
+            <div class='share-btn-container'>
+                <table>
+                <tr>
+                    <td><button id='share-button' class='share-button'></button></td>
+                    <td><input id='share-input' readonly class='input-1' /></td>
+                    <td class='cp-btn-container'><button id='cp-button' class='cp-button'></button> </td>
+                </tr>
+                </table>
+            </div>
+
+            <div class='second-line'></div>
+
+            <!--保存的链接列表区域-->
+            <div>
+               <div id ='profiles' class='profiles-container'>
+
+               </div>
+            </div>
+
+            <div class='sep-quit'></div>
+
+            <div class='quit-button-container'>
+                <span><button id='quit-button' class='quit-button'></button></span>
+            </div>
+        </div>
+    </div>
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script>
+        require('../js/render.js');
+    </script>
+
+</body>
+
+</html>
