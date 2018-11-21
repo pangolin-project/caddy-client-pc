@@ -198,7 +198,7 @@ function showTipOverDom(ev, text) {
     var left = $('#' + ev.target.id).offset().left;
     var posLeft = left;
     var posTop = top - 20;   
-    var tip = $("<div id='tips' style='width:60px;height:20px; background-color:black; position:absolute; left:"+posLeft+"px; top:"+posTop+"px; '>"+text+"</div>");
+    var tip = $("<div id='tips' style='width:60px;height:20px; text-align:center; background-color:black; position:absolute; left:"+posLeft+"px; top:"+posTop+"px; '>"+text+"</div>");
     $("body").append(tip);
 }
 
@@ -222,7 +222,7 @@ function getTipText(targetId) {
     } else if (targetId == 'cp-button') {
         return '复制链接';
     } else if(targetId == 'disconnected-img') {
-        return "连接断开";
+        return "未连接";
     } else if(targetId == 'connected-img') {
         return '已连接';
     } else {
