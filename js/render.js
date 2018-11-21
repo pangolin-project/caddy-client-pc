@@ -193,12 +193,55 @@ function  onClickMinimize() {
     sendAsyncMsg(messages.buildMsg(messages.MSG_TYPE_MINIMIZE, ''));
 }
 
-function onMouseEnter(ev) {
+function showTipOverDom(ev, text) {
+    var top = $('#' + ev.target.id).offset().top;
+    var left = $('#' + ev.target.id).offset().left;
+    var posLeft = left;
+    var posTop = top - 20;   
+    var tip = $("<div id='tips' style='width:60px;height:20px; background-color:black; position:absolute; left:"+posLeft+"px; top:"+posTop+"px; '>"+text+"</div>");
+    $("body").append(tip);
+}
 
+function hideTip(ev) {
+    $("#tips").remove();
+}
+
+function getTipText(targetId) {
+    if ( targetId == 'connect-button') {
+        if (connectionState == 'connected') {
+            return '点击断开';
+        } else if (connectionState == 'disconnected') {
+            return '点击连接';
+        } else {
+            return '错误';
+        }
+    } else if (targetId == 'save-button') {
+        return '保存链接';
+    } else if (targetId == 'share-button') {
+        return '点击分享';
+    } else if (targetId == 'cp-button') {
+        return '复制链接';
+    } else if(targetId == 'disconnected-img') {
+        return "连接断开";
+    } else if(targetId == 'connected-img') {
+        return '已连接';
+    } else {
+        return '错误';
+    }
+}
+
+function onMouseEnter(ev) {
+    logger.log("mouse enter :" + ev.target.id);
+    var top = $('#' + ev.target.id).offset().top;
+    var left = $('#' + ev.target.id).offset().left;
+
+    showTipOverDom(ev, getTipText(ev.target.id));
+    logger.log("mouse enter x:" + left + " y:"+ top);
 }
 
 function onMouseLeave(ev) {
-
+    logger.log("mouse leave :" + ev.target.id);
+    hideTip();
 }
 
 
@@ -208,10 +251,10 @@ $(()=> {
         onClickConnection();
     });
 
-    $('#connect-button').bind('onmouseenter', (ev) =>{
+    $('#connect-button').mouseenter((ev) =>{
         onMouseEnter(ev);
     });
-    $('#connect-button').bind('onmouseleave', (ev) =>{
+    $('#connect-button').mouseleave((ev) =>{
         onMouseLeave(ev);
     });
 
@@ -220,11 +263,11 @@ $(()=> {
         onClickShare();
     });
 
-    $('#share-button').bind('onmouseenter', (ev) =>{
+    $('#share-button').mouseenter ((ev) =>{
         onMouseEnter(ev);
     });
 
-    $('#share-button').bind('onmouseleave', (ev) =>{
+    $('#share-button').mouseleave((ev) =>{
         onMouseLeave(ev);
     });
 
@@ -232,10 +275,10 @@ $(()=> {
         onClickCp();
     });
 
-    $('#cp-button').bind('onmouseenter', (ev) =>{
+    $('#cp-button').mouseenter((ev) =>{
         onMouseEnter(ev);
     });
-    $('#cp-button').bind('onmouseleave', (ev) =>{
+    $('#cp-button').mouseleave( (ev) =>{
         onMouseLeave(ev);
     });
 
@@ -247,15 +290,32 @@ $(()=> {
         onClickSave();
     });
 
-    $('#save-button').bind('onmouseenter', (ev) =>{
+    $('#save-button').mouseenter((ev) =>{
         onMouseEnter(ev);
     });
-    $('#save-button').bind('onmouseleave', (ev) =>{
+    $('#save-button').mouseleave((ev) =>{
         onMouseLeave(ev);
     });
 
     $('#minimize-box').bind('click', () =>{
         onClickMinimize();
+    });
+
+    $('#disconnected-img').mouseenter((ev) =>{
+        onMouseEnter(ev);
+    });
+
+    $('#disconnected-img').mouseleave((ev) =>{
+        onMouseLeave(ev);
+    });
+
+
+    $('#connected-img').mouseenter((ev) =>{
+        onMouseEnter(ev);
+    });
+
+    $('#connected-img').mouseleave((ev) =>{
+        onMouseLeave(ev);
     });
 
     initProfileUIList();
