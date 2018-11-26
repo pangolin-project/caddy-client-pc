@@ -319,4 +319,8 @@ $(()=> {
     setConnectionState('disconnected');
 
     processMessages();
+
+    process.on('uncaughtException', (reason, p) => {
+        logger.log('uncaught exception : ' + reason);
+    });
 });
