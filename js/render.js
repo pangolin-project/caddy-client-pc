@@ -231,16 +231,13 @@ function getTipText(targetId) {
 }
 
 function onMouseEnter(ev) {
-    logger.log("mouse enter :" + ev.target.id);
     var top = $('#' + ev.target.id).offset().top;
     var left = $('#' + ev.target.id).offset().left;
 
     showTipOverDom(ev, getTipText(ev.target.id));
-    logger.log("mouse enter x:" + left + " y:"+ top);
 }
 
 function onMouseLeave(ev) {
-    logger.log("mouse leave :" + ev.target.id);
     hideTip();
 }
 
