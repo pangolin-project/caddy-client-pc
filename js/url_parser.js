@@ -9,6 +9,7 @@ let proxyPort = 0;
 let proxyUser = '';
 let proxyPwd = '';
 let isAdmin = false;
+let adminPort = 0;
 
 const clientDownloadURL = 'https://caddy-forwardproxy/download/client/download.html';
 const saveFilePath = __dirname + "/config.dat";
@@ -25,20 +26,17 @@ function parseUserPwd(userPwdStr) {
         return false;
     }
 }
-//parse: ?caddy=1&m=md5hex(admin=username) 
+//parse: ?caddy=1&adp=12312
+// or ?caddy=1
 function parseQueryStr(queryStr) {
-    if(queryStr.indexOf('?caddy=1&m=') == 0) {
+    if(queryStr.indexOf('?caddy=1&adp=') == 0) {
         let queryStr1 = queryStr.split('&');
         if(queryStr1.length == 2) {
             let adminStr = queryStr1[1];
             let adminParts = adminStr.split('=');
-            let adminMD5Str = adminParts[1];
-            let calculateMd5Str = md5('admin=' + proxyUser);
-            if (calculateMd5Str == adminMD5Str) {
-                isAdmin = true;
-            } else {
-                isAdmin = false;
-            }
+            let adminPortStr = adminParts[1];
+            adminPort = parseInt(adminPortStr);
+            isAdmin = true;
             return true;
         } else {
             return false;
@@ -53,7 +51,7 @@ function parseQueryStr(queryStr) {
 }
 
 
-//parse : hs://base64(username:password)@host:port/?caddy=1&m=md5hex(admin=username)  or
+//parse : hs://base64(username:password)@host:port/?caddy=1&adp=1232  or
 //hs://base64(username:password)@host:port/?caddy=1
 //return true or false
 function parseProxyUrl(proxyUrl) {
@@ -94,8 +92,7 @@ module.exports = {
     //share link format : 
     //https://caddyproxy-website-url/path/to/caddy-invitepage.html#urlencode(hs://base64(username:password)@host:port/?caddy=1)
     //manage url:
-    //hs://base64(username:password)@host:port/?caddy=1&m=md5hex(admin=username)  
-
+    //hs://base64(username:password)@host:port/?caddy=1&adp=1233 
     //return true or false
     parseLinkStr : function(linkStr) {
         if (linkStr.indexOf('https://') == 0) {
@@ -113,7 +110,8 @@ module.exports = {
                 return  false;
             }
         } else if (linkStr.indexOf('hs://') == 0) {
-            return parseProxyUrl(linkStr);
+            proxyUrl = decodeURIComponent(linkStr);
+            return parseProxyUrl(proxyUrl);
         } else {
             return false;
         }
@@ -135,6 +133,9 @@ module.exports = {
         return proxyPwd;
     },
 
+    getAdminPort : function() {
+        return adminPort;
+    },
     getBasicAuthenKey : function() {
         return Buffer.from(proxyUser+':'+proxyPwd, 'utf8').toString('base64');
     },
