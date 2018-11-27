@@ -1,5 +1,5 @@
 {
-  "name": "caddy_client",
+  "name": "pangolin_client",
   "version": "1.0.0",
   "description": "a https proxy client",
   "main": "main.js",
