@@ -19,6 +19,8 @@ const testingLinkStr4 = "https://caddyproxy-website-url/path/to/caddy-invite-pag
 const testingLinkStr5 = "https://caddyproxy-website-url/path/to/caddy-invite-page.html#hs%3A%2F%2FdXNlcm5hbWU6cGFzc3dvcmQ%3D%40lierccp.tk%3A443%2F%3Fcaddy%3D1%26m%3Df78f5520afea15ea5e7821bdb0600f91";
 
 
+const testingLinkStr6 = "hs://YWRtaW46MTU0MzI3Mjc2MQ==@caddyproxy.tk:443/?caddy=1&adp=12761";
+
 
 let ret = false;
 ret = urlParser.parseLinkStr(testingLinkStr1);
@@ -71,6 +73,21 @@ ret = urlParser.parseLinkStr(testingLinkStr5);
 console.log('parse result is ' + ret);
 console.log('download url is :' + urlParser.getDownloadUrl());
 console.log('admin '+ urlParser.getAdminFlag());
+console.log('host is ' + urlParser.getProxyHost());
+console.log('port is ' + urlParser.getProxyPort());
+console.log('pwd is ' + urlParser.getProxyPwd());
+console.log('user is ' + urlParser.getProxyUser());
+
+
+
+//testingLinkStr6
+
+console.log('++++++++++++++++++++');
+ret = urlParser.parseLinkStr(testingLinkStr6);
+console.log('parse result is ' + ret);
+console.log('download url is :' + urlParser.getDownloadUrl());
+console.log('admin '+ urlParser.getAdminFlag());
+console.log('admin port is :' + urlParser.getAdminPort());
 console.log('host is ' + urlParser.getProxyHost());
 console.log('port is ' + urlParser.getProxyPort());
 console.log('pwd is ' + urlParser.getProxyPwd());
