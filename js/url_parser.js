@@ -11,7 +11,7 @@ let proxyPwd = '';
 let isAdmin = false;
 let adminPort = 0;
 
-const clientDownloadURL = 'https://github.com/pangolin-project/pangolin-client-pc/releases/download/v1.0.1/caddy_client-win32-ia32.zip';
+const clientDownloadURL = 'https://github.com/pangolin-project/pangolin-client-pc/releases/download/v1.0.1/pangolin_client-win32-ia32.zip';
 const saveFilePath = __dirname + "/config.dat";
 
 //parse : base64(username:password)
