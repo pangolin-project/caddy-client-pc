@@ -62,7 +62,7 @@ function processMessages() {
 function onClickConnection() {
     let msg ;
     if (connectionState == 'disconnected') {
-        let url = decodeURIComponent($('#connect-url').val());
+        let url = decodeURIComponent($('#connect-url').val()).trim();
         logger.log('connect url is :' + url);
         msg = messages.buildMsg(messages.MSG_TYPE_CONNECT, url);
         sendAsyncMsg(msg);
