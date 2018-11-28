@@ -30,7 +30,7 @@ function sendAsyncMsg(msg) {
 
 
 function processMsgReply(msg) {
-    console.log('get msg reply '+ msg.type);
+    logger.log('get msg reply '+ msg.type);
     if( msg.type == messages.MSG_TYPE_CONNECT_RET) {
         if(msg.param == 0) {
             //success
