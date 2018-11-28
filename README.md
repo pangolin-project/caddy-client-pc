@@ -3,7 +3,7 @@
 ## 如何使用?
 - UI 如下:
 ![](https://github.com/pangolin-project/pangolin-client-pc/blob/master/gui.png)
-1. 在第一个输入框输入代理服务器的连接URL字符串
+1. 在第一个输入框输入代理服务器的连接URL字符串(此连接字符串在部署服务器端的时候会生成。例如：hs://YWRtaW46MTU0MzI3MTQxNA==@yourdomain.com:443/?caddy=1&adp=11414)
 2. 点击右侧的旋转箭头按钮，如果上面的打√的变为黄色，说明此服务器可以连接通
 3. 打开浏览器，输入google.com看是否能够访问，如果能够访问则说明代理成功啦
 
