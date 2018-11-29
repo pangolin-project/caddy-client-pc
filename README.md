@@ -1,5 +1,7 @@
 ## pangolin-server https代理客户端
   目前只支持windows 平台
+## 此项目是什么？
+   此客户端项目主要配合服务器https://github.com/pangolin-project/pangolin-server 来做https的代理。能够通过此代理技术来保证访问的安全性和访问很多被屏蔽的网站。
 ## 如何使用?
 - UI 如下:
 ![](https://github.com/pangolin-project/pangolin-client-pc/blob/master/gui.png)
