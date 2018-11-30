@@ -10,12 +10,13 @@
     "md5": "^2.2.1"
   },
   "devDependencies": {
+    "electron": "^3.0.10",
     "electron-packager": "^12.2.0"
   },
   "scripts": {
     "start": "electron main.js",
     "dbg": "electron main.js  --enable-logging --disable-gpu",
-    "pack": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=./dist/win32"
+    "pack": "electron-packager ./ --platform=win32 --arch=ia32 --out=./dist/win32"
   },
   "author": "",
   "license": "ISC"
