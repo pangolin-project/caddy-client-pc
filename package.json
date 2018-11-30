@@ -4,20 +4,18 @@
   "description": "a https proxy client",
   "main": "main.js",
   "dependencies": {
-    "electron": "^3.0.9",
     "electron-log": "^2.2.17",
     "electron-prompt": "^1.2.0",
     "jquery": "^3.3.1",
     "md5": "^2.2.1"
   },
   "devDependencies": {
-    "electron": "^3.0.9",
     "electron-packager": "^12.2.0"
   },
   "scripts": {
-    "start": "./node_modules/.bin/electron main.js",
-    "dbg": "./node_modules/.bin/electron main.js  --enable-logging --disable-gpu --force-cpu-draw",
-    "packager": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=./dist/win32"
+    "start": "electron main.js",
+    "dbg": "electron main.js  --enable-logging --disable-gpu",
+    "pack": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=./dist/win32"
   },
   "author": "",
   "license": "ISC"
