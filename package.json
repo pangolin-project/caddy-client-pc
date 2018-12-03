@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "electron main.js",
-    "dbg": "electron main.js  --enable-logging --disable-gpu",
+    "dbg": "electron main.js  --disable-gpu",
     "pack": "electron-packager ./ --platform=win32 --arch=ia32 --out=./dist/win32"
   },
   "author": "",

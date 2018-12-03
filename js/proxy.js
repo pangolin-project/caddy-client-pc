@@ -2,12 +2,45 @@ const http = require('http');
 const fs = require('fs');
 const logger = require('./logger.js');
 const tls = require('tls');
-const spawn = require('child_process').spawn;
+const { spawn, spawnSync } = require('child_process');
 const path = require('path');
 
 let  httpServer = null;
 let  urlParser = null;
 let  connStateGetter = null;
+
+//callback:  to get admin password
+//callbackOnOk: adjustPrivilege success callback
+function adjustPrivilege(callback, callbackOnOk) {
+    let adminPwd = callback();
+    let input = adminPwd + '\n';
+    
+    let working_dir = path.join(__dirname);
+    let options = {
+        'cwd' : working_dir,
+    };
+    //logger.log('input cmd is: ' + input + " cwd :" + working_dir);
+    try {
+        let chown = spawn('sudo', ['chown', 'root', './sysproxy'], options);
+        chown.on('exit', (code, signal) => {
+            logger.log('chown chown exit code :' + code);
+            let chmod = spawn('sudo', ['chmod', 'u+s', './sysproxy'], options);
+            chmod.on('exit', (code , signal) =>{
+                logger.log('sudo chmod exit code:' + code);
+                if( code == 0 ) {
+                    callbackOnOk();
+                }
+            });
+        });
+        setTimeout(() => {
+            chown.stdin.end(input);
+        }, 1500);
+    } catch(error) {
+        logger.log('exception msg :' + error);
+    }
+}
+
+
 
 module.exports = {
     setParser: function(parser) {
@@ -161,11 +194,51 @@ module.exports = {
         });
         logger.log('unproxy ....');
     },
-    setProxyConfigMac: function () {
-    
+    //callback: get admin password
+    setProxyConfigMac: function (callback) {
+        let working_dir = path.join(__dirname);
+        logger.log('set darwin  work dir :'+ working_dir);
+        let options = {
+            cwd : working_dir,
+        };
+        let childProcess = spawn('./sysproxy', ['on', '127.0.0.1', '8081'], options);
+        childProcess.stdout.on('data', (data) => {
+            logger.log('execute log :' + data);
+        });
+        childProcess.on('exit', (code, signal) => {
+            if (code != 0) {
+                logger.log('execute sysproxy set failed code :' + code);
+                adjustPrivilege(callback, () => {
+                    let doProxy = spawn('./sysproxy', ['on', '127.0.0.1', '8081'], options);
+                    doProxy.on('exit', (code, signal) => {
+                        if (code != 0) {
+                            logger.log('set proxy failed on mac os');
+                        } else {
+                            logger.log('set proxy success on mac os');
+                        }
+                    });
+                });
+            } else {
+                logger.log('proxy darwin success');
+            }
+        });
+
     },
     unsetProxyConfigMac: function (callback) {
-        callback();
+        let working_dir = path.join(__dirname);
+        logger.log('set darwin  work dir :'+ working_dir);
+        let options = {
+            cwd : working_dir,
+        };
+        let childProcess = spawn('./sysproxy', ['off', '127.0.0.1', '8081'], options);
+        childProcess.on('exit', (code, signal) => {
+            if (code != 0) {
+                logger.log('sysproxy unset failed code :' + code);
+            } else {
+                logger.log('unproxy darwin success');
+            }
+            callback();
+        });
     },
     setProxyConfigLinux: function () {
         
@@ -173,10 +246,12 @@ module.exports = {
     unsetProxyConfigLinux: function (callback) {
         callback();
     },
-    setProxyConfig: function () {
+    //the callback will get the admin password 
+    setProxyConfig: function (callback) {
         let OS = this.getOSType();
+        logger.log('set proxy on OS: '+ OS);
         if( OS == 'darwin') {
-            this.setProxyConfigMac();
+            this.setProxyConfigMac(callback);
         } else if ( OS == 'linux') {
             this.setProxyConfigLinux();
         } else if ( OS == 'win32') {

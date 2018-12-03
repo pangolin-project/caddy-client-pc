@@ -6,6 +6,7 @@ const logger = require('../js/logger.js');
 const messages = require('../js/messages.js');
 const urlParser = require('../js/url_parser');
 const prompt = require('electron-prompt');
+let adminPwd = '';
 
 
 //values: connected , disconnected
@@ -58,14 +59,51 @@ function processMessages() {
 }
 
 
+//callback for continue
+function promptGetAdminPwd(callback) {
+    if (adminPwd.length == 0 && process.platform == 'darwin') {
+        //get admin password by prompting ui
+        let promptOptions = {
+            title: '提示',
+            label: '管理员密码:',
+            value: '',
+            width: 250,
+            height:150,
+            inputAttrs: {
+                type: 'text',
+                required: true
+            },
+            type: 'input'
+        };
+        prompt(promptOptions)
+        .then((v) => {
+            if(v === null) {
+                alert('未输入密码');
+                logger.log('user do not input password');
+            } else {
+                adminPwd = v;
+                sendAsyncMsg(messages.buildMsg(messages.MSG_TYPE_ADMINPWD, adminPwd));
+                callback();
+            }
+        })
+        .catch(console.error);
+        return ;    
+    } else {
+        callback();
+    }
+    return ;
+}
+
 
 function onClickConnection() {
     let msg ;
     if (connectionState == 'disconnected') {
-        let url = decodeURIComponent($('#connect-url').val()).trim();
-        logger.log('connect url is :' + url);
-        msg = messages.buildMsg(messages.MSG_TYPE_CONNECT, url);
-        sendAsyncMsg(msg);
+        promptGetAdminPwd(() => {
+            let url = decodeURIComponent($('#connect-url').val()).trim();
+            logger.log('connect url is :' + url);
+            msg = messages.buildMsg(messages.MSG_TYPE_CONNECT, url);
+            sendAsyncMsg(msg);
+        });
     } else if (connectionState == 'connected') {
         msg = messages.buildMsg(messages.MSG_TYPE_DISCONNECT, '');
         sendAsyncMsg(msg);

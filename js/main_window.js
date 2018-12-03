@@ -6,6 +6,7 @@ const messages = require('./messages.js');
 const urlParser =  require('./url_parser.js');
 const tls = require('tls');
 const proxy = require('./proxy.js');
+let adminPwd = '';
 
 let mainWindow = null;
 let connState = 'disconnected'; // disconnected, connected
@@ -17,9 +18,13 @@ function sendReplyMsg(event, msg) {
 function setConnectState(state) {
     connState = state;
     if (state == 'disconnected') {
-        proxy.unsetProxyConfig();
+        proxy.unsetProxyConfig(()=>{
+            logger.log('unproxy finished');
+        });
     } else if (state == 'connected') {
-        proxy.setProxyConfig();
+        proxy.setProxyConfig( () => {
+            return adminPwd;
+        });
     }
 }
 
@@ -43,7 +48,7 @@ function tryToConnect(event, url) {
             });
             sendReplyMsg(event, messages.buildMsg(messages.MSG_TYPE_CONNECT_RET, 0));
         });
-        tlsSocket.setTimeout(5000);
+        tlsSocket.setTimeout(10000);
         tlsSocket.on('timeout', () => {
             logger.log('tls connection timeout!');
             tlsSocket.end();
@@ -62,7 +67,7 @@ function tryToConnect(event, url) {
 
 
 function onConnectMsg(event, url) {
-    console.log('onConnectMsg url:' + url);
+    logger.log('onConnectMsg url:' + url);
     proxy.startHttpServer();
     if (!urlParser.parseLinkStr(url)) {
         logger.log('url format is error!!!');
@@ -77,7 +82,7 @@ function onConnectMsg(event, url) {
     } else {
         logger.log(mainWindow,'unknown state : ' + connState);
     }
-
+    logger.log('connect finished');
 }
 
 function onDisconnectMsg(code) {    
@@ -97,20 +102,20 @@ function onAsyncMsg(event, msg) {
         closeWindowEx();
     } else if (msg.type == messages.MSG_TYPE_MINIMIZE) {
         mainWindow.minimize();
-    } 
-    else {
+    }  else if (msg.type == messages.MSG_TYPE_ADMINPWD) {
+        adminPwd = messages.getMsgParam(msg);
+    } else {
         logger.log(mainWindow,'unknown msg '+ msg.type);
     }
 
 }
 
 function closeWindowEx() {
-    logger.log('close window ex ');
+    logger.log('close window ex!!! quit ');
     proxy.stopHttpServer();
     proxy.unsetProxyConfig(() =>{
         mainWindow.close()
     });
-    //setTimeout(() => {mainWindow.close()}, 1500);
 }
 
 function OpenDebug() {
