@@ -32,3 +32,10 @@
 1. 由于客户端和服务器端之间采用的是tls的方式，因此，对于每一个连接的数据加密密钥都是不一样的。相比shadowsocks的协议而言，更为安全！
 2. 傻瓜化的使用界面，让用户使用起来更方便，再配合服务器端的一键配置脚本。让您无需任何部署经验，仍然可以快速部署属于您自己的服务器。
 3. 分享更为简单。客户端提供了一键分享的功能，让分享起来更为方便。更符合国人的习惯。
+
+## 如何做二次开发？
+1. 首先请安装nodejs的开发环境
+2. git clone https://github.com/pangolin-project/pangolin-client-pc.git
+3. 进入到代码根目录pangolin-client-pc
+4. npm install
+5. npm run dbg 项目就可以运行起来啦！
