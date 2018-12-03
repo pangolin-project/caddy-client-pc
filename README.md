@@ -9,9 +9,12 @@
 2. 点击右侧的旋转箭头按钮![](https://github.com/pangolin-project/pangolin-client-pc/blob/master/html/images/ready-connect.png)，如果上面的打√![](https://github.com/pangolin-project/pangolin-client-pc/blob/master/html/images/connected-2.png)的变为黄色，说明此服务器可以连接通
 3. 打开浏览器，输入google.com看是否能够访问，如果能够访问则说明代理成功啦
 
+## 如何断开:
+1. 再次点击按钮![](https://github.com/pangolin-project/pangolin-client-pc/blob/master/html/images/ready-connect.png),然后状态栏上的图标![](https://github.com/pangolin-project/pangolin-client-pc/blob/master/html/images/disconnected-2.png)变为黄色即可
+
 ## 如何分享自己的代理链接
-1. 第一种是直接将自己的连接URL发送给对方，对方下载客户端程序运行，粘贴到客户端，点击连接按钮即可
-2. 第二种是点击分享按钮，然后点击右边的剪刀按钮，将复制好的链接地址发送给对方，对方讲此链接地址输入到浏览器粘贴即可下载客户端程序。客户端程序下载完毕后就可以将此链接URL粘贴到客户端程序，点击连接，即可进行代理了。
+1. 第一种是直接将自己的连接URL发送给对方，对方下载客户端程序运行，粘贴到客户端，点击连接按钮![](https://github.com/pangolin-project/pangolin-client-pc/blob/master/html/images/ready-connect.png)即可
+2. 第二种是点击分享按钮，然后点击右边的剪刀![](https://github.com/pangolin-project/pangolin-client-pc/blob/master/html/images/copy.png)按钮，将复制好的链接地址发送给对方，对方讲此链接地址输入到浏览器粘贴即可下载客户端程序。客户端程序下载完毕后就可以将此链接URL粘贴到客户端程序，点击连接，即可进行代理了。
 
 ## 如何保存连接URL？
 1. 当将连接URL粘贴到连接URL输入框后，点击最右侧的保存按钮即可。这样每次启动客户端的时候，直接点击连接即可。
