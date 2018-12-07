@@ -12,7 +12,7 @@ let isAdmin = false;
 let adminPort = 0;
 
 const clientDownloadURL = 'https://github.com/pangolin-project/pangolin-client-pc/releases/download/v1.0.4/pangolin_client-win32-ia32.zip';
-const saveFilePath = __dirname + "/config.dat";
+const saveFilePath = path.join(__dirname, "/config.dat").replace('app.asar', 'app.asar.unpacked');
 
 //parse : base64(username:password)
 function parseUserPwd(userPwdStr) {

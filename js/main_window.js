@@ -118,9 +118,7 @@ function closeWindowEx() {
     });
 }
 
-function OpenDebug() {
-    mainWindow.webContents.openDevTools({mode:'detach'})
-}
+
 
 module.exports = {
     createMainWindow :  function() {
@@ -162,6 +160,9 @@ module.exports = {
         ipcMain.on('async-msg', (event, args) => {
             onAsyncMsg(event, args);
         });
+    },
+    OpenDebug: function() {
+        mainWindow.webContents.openDevTools({mode:'detach'})
     }
 }
 

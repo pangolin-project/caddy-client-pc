@@ -1,7 +1,7 @@
 {
   "name": "pangolin_client",
   "version": "1.0.0",
-  "description": "a https proxy client",
+  "description": " https proxy client",
   "main": "main.js",
   "dependencies": {
     "electron-log": "^2.2.17",
@@ -11,12 +11,42 @@
   },
   "devDependencies": {
     "electron": "^3.0.10",
+    "electron-builder": "^20.38.2",
     "electron-packager": "^12.2.0"
   },
   "scripts": {
     "start": "electron main.js",
     "dbg": "electron main.js  --disable-gpu",
-    "pack": "electron-packager ./ --platform=win32 --arch=ia32 --out=./dist/win32"
+    "pack": "electron-packager ./ --platform=win32 --arch=ia32 --out=./dist/win32",
+    "packmac": "electron-builder"
+  },
+  "build": {
+    "appId": "pangolin.com",
+    "productName" : "pangolin-client-pc",
+    "target": "zip",
+    "mac" : {
+      "target": "dmg"
+    },
+    "dmg" : {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "files": ["**/*"],
+    "asarUnpack": ["js/sysproxy", "js/config.dat"],
+    "directories": {
+      "output": "dists/darwin/"
+  }
   },
   "author": "",
   "license": "ISC"
