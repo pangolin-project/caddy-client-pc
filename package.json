@@ -17,7 +17,7 @@
   "scripts": {
     "start": "electron main.js",
     "dbg": "electron main.js  --disable-gpu",
-    "pack": "electron-packager ./ --platform=win32 --arch=ia32 --out=./dist/win32",
+    "pack": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=./dist/win32",
     "packmac": "electron-builder"
   },
   "build": {
